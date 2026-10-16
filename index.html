@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <title>Escala de Caprini | Evaluación de riesgo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #253332;
+      --muted: #65716d;
+      --paper: #f6f5ef;
+      --white: #fffefa;
+      --line: #d9dfd8;
+      --mint: #dceee4;
+      --blue: #dceaf0;
+      --peach: #f8e5d8;
+      --rose: #f2dede;
+      --yellow: #f3edcf;
+      --green-ink: #315e4e;
+      --blue-ink: #365e70;
+      --orange-ink: #875333;
+      --red-ink: #7c4444;
+      --shadow: 0 16px 42px rgba(36, 51, 49, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: radial-gradient(#cad9cf 0.65px, transparent 0.65px);
+      background-size: 18px 18px;
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 64px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 0 23px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--green-ink);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid #b7d0c1;
+      border-radius: 50%;
+      background: var(--mint);
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .edition {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr minmax(240px, 330px);
+      align-items: end;
+      gap: 32px;
+      padding: 30px 0 28px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1.06;
+    }
+
+    .intro p {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .model-note {
+      padding: 13px 15px;
+      border-left: 3px solid #a9c7b5;
+      background: rgba(220, 238, 228, .67);
+      color: #415950;
+      font-size: 12px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 296px;
+      align-items: start;
+      gap: 22px;
+    }
+
+    .form-column { display: grid; gap: 14px; }
+
+    .section {
+      padding: 19px 21px 20px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 254, 250, .94);
+      box-shadow: 0 3px 12px rgba(36, 51, 49, .025);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .section-number {
+      display: grid;
+      flex: 0 0 27px;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--blue-ink);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section h2 {
+      margin: 1px 0 2px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .section-hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: minmax(180px, .8fr) 1.2fr;
+      align-items: center;
+      gap: 18px;
+      padding: 12px 0;
+      border-top: 1px solid #e8ebe5;
+    }
+
+    fieldset.control-row { min-width: 0; margin: 0; padding-right: 0; padding-left: 0; border-right: 0; border-bottom: 0; border-left: 0; }
+
+    .control-row:first-of-type { border-top: 0; }
+
+    .control-label { font-size: 13px; font-weight: 700; }
+    .control-help { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 400; }
+
+    select {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px 36px 8px 11px;
+      border: 1px solid #bfcac2;
+      border-radius: 4px;
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .choice-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .choice-list.single { grid-template-columns: 1fr; }
+
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      min-height: 40px;
+      padding: 9px 10px;
+      border: 1px solid #e0e5df;
+      border-radius: 4px;
+      background: #fffefa;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1.35;
+      transition: background-color .16s ease, border-color .16s ease;
+    }
+
+    .choice:hover { border-color: #a8c4b3; background: #f2f8f3; }
+    .choice:has(input:checked) { border-color: #8caf9a; background: #edf5ef; }
+
+    .choice input {
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
+      margin: 1px 0 0;
+      accent-color: #537e68;
+    }
+
+    .points {
+      flex: 0 0 auto;
+      margin-left: auto;
+      padding-left: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .factor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .factor-group + .factor-group {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #e8ebe5;
+    }
+
+    .factor-group h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 9px;
+      color: #44534e;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .factor-tag {
+      display: inline-grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #746a3d;
+      font-size: 10px;
+    }
+
+    .score-panel {
+      position: sticky;
+      top: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .score-top {
+      padding: 19px 20px 17px;
+      background: var(--mint);
+      transition: background-color .2s ease;
+    }
+
+    .score-top[data-level="moderate"] { background: var(--blue); }
+    .score-top[data-level="high"] { background: var(--peach); }
+    .score-top[data-level="very-high"] { background: var(--rose); }
+
+    .score-label {
+      margin: 0 0 3px;
+      color: #465851;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .score-line { display: flex; align-items: baseline; gap: 8px; }
+
+    .score-value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 62px;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-unit { color: #50605a; font-size: 13px; }
+
+    .risk-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 9px;
+      border: 1px solid rgba(37, 51, 50, .17);
+      border-radius: 3px;
+      color: var(--green-ink);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .score-top[data-level="moderate"] .risk-badge { color: var(--blue-ink); }
+    .score-top[data-level="high"] .risk-badge { color: var(--orange-ink); }
+    .score-top[data-level="very-high"] .risk-badge { color: var(--red-ink); }
+
+    .score-details { padding: 17px 20px 19px; }
+
+    .range-title {
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .range-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+
+    .range-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 9px;
+      border-radius: 3px;
+      color: #59645f;
+      font-size: 11px;
+    }
+
+    .range-item.active { color: var(--ink); font-weight: 700; outline: 1px solid #9eb9a8; }
+    .range-item:nth-child(1) { background: #edf5ef; }
+    .range-item:nth-child(2) { background: #edf3f5; }
+    .range-item:nth-child(3) { background: #fbf1e9; }
+    .range-item:nth-child(4) { background: #f8eded; }
+
+    .clinical-note {
+      margin: 15px 0 0;
+      padding-top: 13px;
+      border-top: 1px solid #e8ebe5;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .action-button {
+      display: inline-flex;
+      min-height: 39px;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid #c7d1c9;
+      border-radius: 4px;
+      background: #fffefa;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .action-button:hover { background: #f0f5f1; }
+    .action-button svg { width: 15px; height: 15px; }
+
+    .disclaimer {
+      margin: 19px 0 0;
+      padding: 12px 15px;
+      border: 1px solid #e3ddc5;
+      border-radius: 4px;
+      background: rgba(243, 237, 207, .55);
+      color: #665f43;
+      font-size: 11px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 820px) {
+      .workspace { grid-template-columns: minmax(0, 1fr) 255px; gap: 14px; }
+      .section { padding: 17px; }
+      .control-row { grid-template-columns: 1fr; gap: 8px; }
+      .intro { grid-template-columns: 1fr 260px; gap: 18px; }
+    }
+
+    @media (max-width: 660px) {
+      .page-shell { width: min(100% - 24px, 520px); padding-top: 20px; }
+      .masthead { padding-bottom: 15px; }
+      .edition { text-align: right; }
+      .intro { grid-template-columns: 1fr; gap: 14px; padding: 24px 0 19px; }
+      .workspace { grid-template-columns: 1fr; }
+      .score-panel { position: static; grid-row: 1; }
+      .score-top { padding: 14px 17px; }
+      .score-value { font-size: 49px; }
+      .score-details { padding: 14px 17px 16px; }
+      .range-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .actions { margin-top: 12px; }
+    }
+
+    @media (max-width: 430px) {
+      .factor-grid, .choice-list { grid-template-columns: 1fr; }
+      .brand { font-size: 11px; }
+      .brand-mark { width: 31px; height: 31px; }
+      .section { padding: 15px 13px; }
+      .range-list { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page-shell { width: 100%; padding: 0; }
+      .masthead { padding-top: 0; }
+      .workspace { grid-template-columns: 1fr 250px; }
+      .score-panel { position: static; box-shadow: none; }
+      .section, .score-panel { break-inside: avoid; }
+      .actions { display: none; }
+      .choice { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">C</span> Evaluación clínica</div>
+      <div class="edition">Modelo Caprini 2013 · Adultos</div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Escala de Caprini</h1>
+        <p>Estimación del riesgo de tromboembolismo venoso en pacientes quirúrgicos y adultos con movilidad reducida.</p>
+      </div>
+      <div class="model-note"><strong>Antes de comenzar</strong><br>Seleccione los factores presentes en el paciente. El puntaje se actualiza automáticamente.</div>
+    </section>
+
+    <div class="workspace">
+      <form class="form-column" id="caprini-form">
+        <section class="section" aria-labelledby="section-basics">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">1</span>
+            <div><h2 id="section-basics">Edad, cirugía y movilidad</h2><p class="section-hint">Elija una opción por cada grupo.</p></div>
+          </div>
+
+          <div class="control-row">
+            <label class="control-label" for="age">Edad del paciente<span class="control-help">Use el grupo que corresponda.</span></label>
+            <select id="age" name="age">
+              <option value="0">Hasta 40 años · 0 puntos</option>
+              <option value="1">41–60 años · 1 punto</option>
+              <option value="2">61–74 años · 2 puntos</option>
+              <option value="3">75 años o más · 3 puntos</option>
+            </select>
+          </div>
+
+          <fieldset class="control-row">
+            <legend class="control-label">Tipo de cirugía<span class="control-help">Marque solo la categoría principal.</span></legend>
+            <div class="choice-list">
+              <label class="choice"><input type="radio" name="surgery" value="0" checked><span>Sin cirugía o aún no definida</span><span class="points">0</span></label>
+              <label class="choice"><input type="radio" name="surgery" value="1"><span>Cirugía menor (&lt;45 min)</span><span class="points">1</span></label>
+              <label class="choice"><input type="radio" name="surgery" value="2"><span>Cirugía abierta mayor (&gt;45 min)</span><span class="points">2</span></label>
+              <label class="choice"><input type="radio" name="surgery" value="2"><span>Cirugía laparoscópica (&gt;45 min)</span><span class="points">2</span></label>
+              <label class="choice"><input type="radio" name="surgery" value="2"><span>Artroscopia</span><span class="points">2</span></label>
+              <label class="choice"><input type="radio" name="surgery" value="5"><span>Artroplastia electiva</span><span class="points">5</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="control-row">
+            <legend class="control-label">Reposo o inmovilidad<span class="control-help">Seleccione el periodo más largo aplicable.</span></legend>
+            <div class="choice-list single">
+              <label class="choice"><input type="radio" name="mobility" value="0" checked><span>Sin reposo o inmovilidad actual</span><span class="points">0</span></label>
+              <label class="choice"><input type="radio" name="mobility" value="1"><span>Reposo / movilidad reducida por menos de 72 horas</span><span class="points">1</span></label>
+              <label class="choice"><input type="radio" name="mobility" value="2"><span>Confinado en cama por más de 72 horas</span><span class="points">2</span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="section" aria-labelledby="section-factors">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">2</span>
+            <div><h2 id="section-factors">Factores clínicos</h2><p class="section-hint">Marque cada factor que esté presente. Los puntos se suman.</p></div>
+          </div>
+
+          <div class="factor-group">
+            <h3><span class="factor-tag">+1</span> Un punto cada uno</h3>
+            <div class="factor-grid">
+              <label class="choice"><input type="checkbox" data-points="1"><span>Índice de masa corporal &gt;25 kg/m²</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Edema actual en las piernas</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Várices</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Embarazo o posparto (&lt;1 mes)</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Aborto espontáneo inexplicado o recurrente</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Anticonceptivos orales o terapia hormonal sustitutiva</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Sepsis en el último mes</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Enfermedad pulmonar grave o neumonía en el último mes</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Función pulmonar anormal (p. ej., EPOC)</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Infarto agudo de miocardio</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Insuficiencia cardiaca congestiva en el último mes</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Enfermedad inflamatoria intestinal</span><span class="points">+1</span></label>
+              <label class="choice"><input type="checkbox" data-points="1"><span>Paciente médico actualmente en reposo en cama</span><span class="points">+1</span></label>
+            </div>
+          </div>
+
+          <div class="factor-group">
+            <h3><span class="factor-tag">+2</span> Dos puntos cada uno</h3>
+            <div class="factor-grid">
+              <label class="choice"><input type="checkbox" data-points="2"><span>Malignidad actual o previa</span><span class="points">+2</span></label>
+              <label class="choice"><input type="checkbox" data-points="2"><span>Yeso que limita la movilidad en el último mes</span><span class="points">+2</span></label>
+              <label class="choice"><input type="checkbox" data-points="2"><span>Acceso venoso central</span><span class="points">+2</span></label>
+            </div>
+          </div>
+
+          <div class="factor-group">
+            <h3><span class="factor-tag">+3</span> Tres puntos cada uno</h3>
+            <div class="factor-grid">
+              <label class="choice"><input type="checkbox" data-points="3"><span>Antecedente personal de trombosis venosa o embolia pulmonar</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Antecedente familiar de tromboembolismo venoso</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Factor V Leiden</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Mutación de protrombina G20210A</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Anticoagulante lúpico</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Anticuerpos anticardiolipina elevados</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Homocisteína sérica elevada</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Trombocitopenia inducida por heparina</span><span class="points">+3</span></label>
+              <label class="choice"><input type="checkbox" data-points="3"><span>Otra trombofilia congénita o adquirida</span><span class="points">+3</span></label>
+            </div>
+          </div>
+
+          <div class="factor-group">
+            <h3><span class="factor-tag">+5</span> Cinco puntos cada uno</h3>
+            <div class="factor-grid">
+              <label class="choice"><input type="checkbox" data-points="5"><span>Accidente cerebrovascular en el último mes</span><span class="points">+5</span></label>
+              <label class="choice"><input type="checkbox" data-points="5"><span>Fractura de cadera, pelvis o pierna en el último mes</span><span class="points">+5</span></label>
+              <label class="choice"><input type="checkbox" data-points="5"><span>Lesión medular aguda en el último mes</span><span class="points">+5</span></label>
+            </div>
+          </div>
+        </section>
+      </form>
+
+      <aside class="score-panel" aria-label="Resultado de la evaluación">
+        <div class="score-top" id="score-top" data-level="very-low">
+          <p class="score-label">Puntaje total</p>
+          <div class="score-line"><output class="score-value" id="score" aria-live="polite">0</output><span class="score-unit">puntos</span></div>
+          <span class="risk-badge" id="risk-label">Riesgo muy bajo</span>
+        </div>
+        <div class="score-details">
+          <p class="range-title">Interpretación del puntaje</p>
+          <ul class="range-list" id="risk-ranges">
+            <li class="range-item active" data-range="low"><span>0 puntos</span><span>Bajo</span></li>
+            <li class="range-item" data-range="moderate"><span>1–2 puntos</span><span>Moderado</span></li>
+            <li class="range-item" data-range="high"><span>3–4 puntos</span><span>Alto</span></li>
+            <li class="range-item" data-range="very-high"><span>5 o más</span><span>Muy alto</span></li>
+          </ul>
+          <p class="clinical-note">La categoría orienta la valoración. La conducta preventiva depende también del procedimiento, el riesgo de sangrado y el protocolo institucional.</p>
+          <div class="actions">
+            <button class="action-button" type="reset" form="caprini-form" title="Borrar todas las selecciones">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-.9 14H5.9L5 6m4 4v6m6-6v6"/></svg>
+              Limpiar
+            </button>
+            <button class="action-button" type="button" id="print-button" title="Imprimir evaluación">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v7H7z"/><path d="M17 11h.01"/></svg>
+              Imprimir
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <p class="disclaimer"><strong>Uso clínico:</strong> herramienta de apoyo para adultos. No reemplaza la valoración profesional, el juicio clínico ni las guías locales. Confirme los factores y su vigencia con la historia clínica antes de tomar decisiones.</p>
+  </main>
+
+  <script>
+    const form = document.querySelector('#caprini-form');
+    const scoreOutput = document.querySelector('#score');
+    const riskLabel = document.querySelector('#risk-label');
+    const scoreTop = document.querySelector('#score-top');
+    const ranges = [...document.querySelectorAll('.range-item')];
+
+    function updateScore() {
+      const agePoints = Number(form.elements.age.value);
+      const surgeryPoints = Number(form.querySelector('input[name="surgery"]:checked').value);
+      const mobilityPoints = Number(form.querySelector('input[name="mobility"]:checked').value);
+      const factorPoints = [...form.querySelectorAll('input[type="checkbox"]:checked')]
+        .reduce((total, input) => total + Number(input.dataset.points), 0);
+      const total = agePoints + surgeryPoints + mobilityPoints + factorPoints;
+      const level = total === 0 ? 'low' : total <= 2 ? 'moderate' : total <= 4 ? 'high' : 'very-high';
+      const labels = {
+        low: 'Riesgo bajo',
+        moderate: 'Riesgo moderado',
+        high: 'Riesgo alto',
+        'very-high': 'Riesgo muy alto'
+      };
+
+      scoreOutput.value = total;
+      scoreOutput.textContent = total;
+      riskLabel.textContent = labels[level];
+      scoreTop.dataset.level = level;
+      ranges.forEach((item) => item.classList.toggle('active', item.dataset.range === level));
+    }
+
+    form.addEventListener('change', updateScore);
+    form.addEventListener('reset', () => requestAnimationFrame(updateScore));
+    document.querySelector('#print-button').addEventListener('click', () => window.print());
+    updateScore();
+  </script>
+</body>
+</html>
