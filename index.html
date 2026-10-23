@@ -9,24 +9,24 @@
     :root {
       color-scheme: light;
       --navy: #12324a;
-      --navy-soft: #1c4061;
+      --navy-soft: #1f4562;
       --blue: #2d6f8b;
       --teal: #2fa9a1;
       --teal-soft: #dff7f5;
-      --mint: #dff2dd;
-      --sage: #e7f5ef;
+      --mint: #d4efdd;
+      --sage: #e8f5ef;
       --gold: #e4be68;
       --gold-soft: #fff3d6;
-      --paper: #f4f7fa;
+      --paper: #f5f8fb;
       --panel: #ffffff;
       --line: #dfeaf0;
       --ink: #1b2d34;
-      --muted: #5b6975;
+      --muted: #5d6d79;
       --success: #25725f;
-      --warning: #ba6e2a;
-      --danger: #9c4f4d;
-      --pink: #f6d8e2;
-      --purple: #dfe5ff;
+      --warning: #b76c29;
+      --danger: #9d4f4a;
+      --rose: #f8dfe8;
+      --lilac: #eae7ff;
       --shadow: 0 18px 40px rgba(18, 50, 74, 0.12);
       --radius: 18px;
     }
@@ -40,7 +40,7 @@
       background:
         radial-gradient(circle at top left, rgba(47, 169, 161, 0.18), transparent 24%),
         radial-gradient(circle at bottom right, rgba(228, 190, 104, 0.18), transparent 22%),
-        linear-gradient(180deg, #f9fbff 0%, #edf5f8 100%);
+        linear-gradient(180deg, #f9fcff 0%, #edf5f8 100%);
       color: var(--ink);
       font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
       font-size: 15px;
@@ -52,7 +52,7 @@
     .page-shell {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 36px 0 64px;
+      padding: 28px 0 64px;
     }
 
     .masthead {
@@ -85,7 +85,7 @@
       height: 40px;
       border: 1px solid rgba(255,255,255,0.28);
       border-radius: 12px;
-      background: linear-gradient(135deg, #f6d8e2 0%, #dfe5ff 35%, #dff7f5 100%);
+      background: linear-gradient(135deg, #f8d9e7 0%, #dfe7ff 35%, #dff7f5 100%);
       color: var(--navy);
       font-family: Georgia, serif;
       font-size: 22px;
@@ -101,9 +101,9 @@
 
     .intro {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(240px, 330px);
-      align-items: end;
-      gap: 28px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 380px);
+      align-items: center;
+      gap: 22px;
       padding: 28px 0 24px;
     }
 
@@ -136,6 +136,125 @@
       box-shadow: 0 10px 24px rgba(18, 50, 74, 0.04);
       font-size: 12px;
     }
+
+    .hero-visual {
+      position: relative;
+      min-height: 230px;
+      padding: 20px;
+      border: 1px solid rgba(18, 50, 74, 0.06);
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.9), rgba(211,236,240,0.9));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0.8;
+    }
+
+    .hero-visual::before {
+      right: -30px;
+      top: -25px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(248,223,232,0.9), rgba(248,223,232,0) 70%);
+    }
+
+    .hero-visual::after {
+      left: -24px;
+      bottom: -25px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(214,239,250,0.95), rgba(214,239,250,0) 65%);
+    }
+
+    .visual-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 12px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.58), rgba(255,255,255,0.2));
+      backdrop-filter: blur(2px);
+    }
+
+    .device {
+      position: relative;
+      width: min(100%, 290px);
+      height: 194px;
+      border-radius: 26px;
+      border: 1px solid rgba(18,50,74,0.08);
+      background: linear-gradient(160deg, rgba(18,50,74,0.97), rgba(45,111,139,0.95));
+      box-shadow: 0 22px 30px rgba(18,50,74,0.15);
+      overflow: hidden;
+    }
+
+    .device::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent 38%, transparent 72%, rgba(255,255,255,0.12));
+    }
+
+    .device-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(0.5px);
+      opacity: 0.9;
+    }
+
+    .blob-one {
+      top: 18px;
+      left: 22px;
+      width: 78px;
+      height: 78px;
+      background: radial-gradient(circle, rgba(248,223,232,1), rgba(248,223,232,0.15) 65%, transparent 70%);
+    }
+
+    .blob-two {
+      right: 22px;
+      top: 30px;
+      width: 96px;
+      height: 96px;
+      background: radial-gradient(circle, rgba(214,239,250,1), rgba(214,239,250,0.15) 60%, transparent 70%);
+    }
+
+    .device-svg {
+      position: absolute;
+      inset: 18px 12px 14px;
+      width: calc(100% - 24px);
+      height: calc(100% - 32px);
+      z-index: 2;
+    }
+
+    .mini-chip {
+      position: absolute;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: #edfefc;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(2px);
+    }
+
+    .chip-1 { left: 20px; top: 18px; }
+    .chip-2 { right: 20px; bottom: 18px; }
 
     .workspace {
       display: grid;
@@ -521,7 +640,45 @@
         <h1 id="page-title">Escala de Caprini</h1>
         <p>Estimación del riesgo de tromboembolismo venoso en pacientes quirúrgicos y adultos con movilidad reducida.</p>
       </div>
-      <div class="model-note"><strong>Antes de comenzar</strong><br>Seleccione los factores presentes en el paciente. El puntaje se actualiza automáticamente.</div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="visual-card">
+          <div class="device">
+            <span class="mini-chip chip-1">Salud vascular</span>
+            <span class="mini-chip chip-2">Riesgo +</span>
+            <span class="device-blob blob-one"></span>
+            <span class="device-blob blob-two"></span>
+            <svg class="device-svg" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración clínica colorida">
+              <defs>
+                <linearGradient id="heartGlow" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#ffd9e6"/>
+                  <stop offset="100%" stop-color="#f9b5c8"/>
+                </linearGradient>
+                <linearGradient id="pulse" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#bfeaf0"/>
+                  <stop offset="100%" stop-color="#5fc1c6"/>
+                </linearGradient>
+                <linearGradient id="leaf" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#d5f2d3"/>
+                  <stop offset="100%" stop-color="#94d6a1"/>
+                </linearGradient>
+              </defs>
+              <g opacity="0.8">
+                <path d="M76 132 C108 92, 128 76, 148 70 C184 59, 220 94, 220 112 C220 127, 204 146, 174 154 C146 161, 104 158, 76 132 Z" fill="url(#pulse)" opacity="0.25"/>
+                <path d="M110 116 C128 92, 140 80, 151 80 C163 80, 176 90, 184 110 C190 124, 186 141, 170 151 C148 164, 120 160, 110 116 Z" fill="url(#heartGlow)" opacity="0.95"/>
+                <path d="M92 132 C110 100, 123 86, 150 84 C191 81, 203 115, 195 142 C190 156, 170 166, 152 168 C122 171, 99 153, 92 132 Z" fill="none" stroke="#fbf8ff" stroke-width="2.5" opacity="0.7"/>
+                <path d="M130 98 L160 98" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M144 86 L144 110" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M211 78 C230 58, 252 70, 255 89 C257 108, 243 123, 221 129" fill="none" stroke="#e7f8f9" stroke-width="3" stroke-linecap="round"/>
+                <path d="M214 110 C235 117, 244 129, 246 144" fill="none" stroke="#d8f0db" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="74" cy="94" r="12" fill="url(#leaf)" opacity="0.8"/>
+                <circle cx="74" cy="94" r="6" fill="#fff" opacity="0.8"/>
+                <path d="M80 146 L90 135 L100 141 L112 126 L122 136 L136 118 L150 131 L167 117" fill="none" stroke="#dff7f5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="workspace">
@@ -645,7 +802,7 @@
               Limpiar
             </button>
             <button class="action-button" type="button" id="print-button" title="Imprimir evaluación">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2m-10 0h8v4H7zm0 0v-5h10v5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2m-8-4h8v5H7z"/></svg>
               Imprimir
             </button>
           </div>
@@ -653,7 +810,7 @@
       </aside>
     </div>
 
-    <p class="disclaimer"><strong>Uso clínico:</strong> herramienta de apoyo para adultos. No reemplaza la valoración profesional, el juicio clínico ni las guías locales. Confirme los factores con la historia clínica y la práctica institucional.</p>
+    <p class="disclaimer"><strong>Uso clínico:</strong> herramienta de apoyo para adultos. No reemplaza la valoración profesional, el juicio clínico ni las guías locales. Confirme los factores con la historia clínica y el criterio del médico tratante.</p>
   </main>
 
   <script>
