@@ -210,19 +210,27 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 14px 26px rgba(18,50,74,0.12);
     }
 
-    .nurse-card img {
+    .nurse-card .nurse-art {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      background: linear-gradient(180deg, rgba(251, 241, 252, 0.88), rgba(223, 247, 245, 0.82));
+    }
+
+    .nurse-card svg {
       display: block;
       width: 100%;
       height: 100%;
       min-height: 200px;
       object-fit: cover;
       object-position: center top;
-      filter: saturate(1.15) contrast(1.04) brightness(1.02);
+      filter: saturate(1.1) contrast(1.05) brightness(1.02);
     }
 
     .floating-badge,
     .floating-chip,
-    .name-tag {
+    .name-tag,
+    .author-credit {
       position: absolute;
       z-index: 2;
       display: inline-flex;
@@ -282,7 +290,6 @@
     }
 
     .author-credit {
-      position: absolute;
       right: 14px;
       top: 14px;
       z-index: 3;
@@ -693,11 +700,54 @@
         <p>Estimación del riesgo de tromboembolismo venoso en pacientes quirúrgicos y adultos con movilidad reducida.</p>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual" aria-label="Diseño con nombre de la autora y enfermera caricatura">
         <div class="nurse-card">
           <span class="floating-badge">Cuidado preventivo</span>
           <span class="author-credit">Autor: <strong>Luz Viviana Galvez</strong></span>
-          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=80" alt="Enfermera profesional" />
+          <div class="nurse-art" aria-hidden="true">
+            <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Enfermera caricatura">
+              <defs>
+                <linearGradient id="bgGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#dff7ff"/>
+                  <stop offset="55%" stop-color="#fff6f9"/>
+                  <stop offset="100%" stop-color="#e9efff"/>
+                </linearGradient>
+                <linearGradient id="uniformGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#5bc0d6"/>
+                  <stop offset="100%" stop-color="#2f81ab"/>
+                </linearGradient>
+              </defs>
+              <rect width="420" height="300" fill="url(#bgGrad)"/>
+              <circle cx="336" cy="48" r="36" fill="#ffd7ea" opacity="0.9"/>
+              <circle cx="92" cy="62" r="28" fill="#dff7f5" opacity="0.75"/>
+              <path d="M0 230 C110 192, 170 205, 260 220 C330 230, 390 212, 420 198 L420 300 L0 300 Z" fill="#e7f9ff"/>
+              <g transform="translate(110 24)">
+                <ellipse cx="100" cy="214" rx="82" ry="18" fill="#cfe8f1" opacity="0.8"/>
+                <circle cx="100" cy="70" r="42" fill="#f8d7c7"/>
+                <path d="M64 58 C69 18, 132 18, 139 58 L136 78 C123 85, 77 85, 64 78 Z" fill="#2b2f66"/>
+                <path d="M76 92 C90 82, 110 82, 125 92 L124 112 C113 120, 89 120, 76 112 Z" fill="#f3b9b1"/>
+                <circle cx="84" cy="72" r="4" fill="#2a2e45"/>
+                <circle cx="118" cy="72" r="4" fill="#2a2e45"/>
+                <path d="M90 82 Q100 90 110 82" fill="none" stroke="#7d4f58" stroke-width="3" stroke-linecap="round"/>
+                <path d="M80 120 L60 170 L94 176 L110 150 L126 176 L160 170 L140 120 Z" fill="url(#uniformGrad)"/>
+                <path d="M52 178 L40 215 L70 218 L82 180 Z" fill="#f8d7c7"/>
+                <path d="M150 178 L162 215 L132 218 L120 180 Z" fill="#f8d7c7"/>
+                <path d="M68 176 L78 230 L96 230 L87 176 Z" fill="#f8d7c7"/>
+                <path d="M132 176 L122 230 L140 230 L150 176 Z" fill="#f8d7c7"/>
+                <path d="M76 122 L62 146 L78 156 L94 128 Z" fill="#f8d7c7"/>
+                <path d="M124 122 L138 146 L122 156 L106 128 Z" fill="#f8d7c7"/>
+                <path d="M82 136 L52 158" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M118 136 L148 158" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M84 112 L79 140" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M116 112 L121 140" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M81 146 L68 156" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M119 146 L132 156" stroke="#f8d7c7" stroke-width="8" stroke-linecap="round"/>
+                <path d="M82 126 L52 120 L42 142 L66 150 Z" fill="#ffffff" opacity="0.5"/>
+                <path d="M118 126 L148 120 L158 142 L134 150 Z" fill="#ffffff" opacity="0.5"/>
+                <path d="M84 150 C92 162, 108 162, 116 150" fill="none" stroke="#efb3ab" stroke-width="4" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
           <span class="floating-chip">Riesgo +</span>
           <div class="name-tag"><span>Especialista</span><strong>Luz Viviana Galvez</strong></div>
         </div>
@@ -825,7 +875,7 @@
               Limpiar
             </button>
             <button class="action-button" type="button" id="print-button" title="Imprimir evaluación">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2m-8 0h8v4H7v-4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 16h10v5H7z"/></svg>
               Imprimir
             </button>
           </div>
@@ -833,7 +883,7 @@
       </aside>
     </div>
 
-    <p class="disclaimer"><strong>Uso clínico:</strong> herramienta de apoyo para adultos. No reemplaza la valoración profesional, el juicio clínico ni las guías locales. Confirme los factores clínicos relevantes y el tratamiento de acuerdo con el protocolo institucional.</p>
+    <p class="disclaimer"><strong>Uso clínico:</strong> herramienta de apoyo para adultos. No reemplaza la valoración profesional, el juicio clínico ni las guías locales. Confirme los factores del paciente y la planilla institucional antes de adoptar decisiones terapéuticas.</p>
   </main>
 
   <script>
